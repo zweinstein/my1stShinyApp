@@ -1,0 +1,67 @@
+---
+title       : Making a Biological Buffer with Potassium Phosphate
+subtitle    : a simple and convenient Shiny App
+author      : Zhen Wang
+job         : Albert Einstein College of Medicine
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : default      # 
+widgets     : [mathjax, bootstrap]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction
+
+Biological reactions are sensitive to the acidity of the solution, which is measured by the negative $log$ of hydrogen ion ($H^+$) concentration, $-log[H^+]$, or simply $pH$. In most living organisms, the $pH$ of blood is maintained at neutral $pH$ (e.g. $pH = 7.4$). In order to study biomolecules under physiological conditions, biological scientists regularly make buffer solutions at neutral $pH$ to mimic the cellular environment. Currently, there is no open-source App available to help scientists with this daily task to prepare biological buffers. I developed a prototype Shiny App that can quickly determine the composition of a potassium phosphate buffer in the $pH$ range of $5.8 - 8$. In the future, this App can be calibrated by experiments to ensure accuracy and more features will be added for making different buffer systems to include a wider $pH$ range. 
+
+The [App](https://zweinstein.shinyapps.io/App_Buffer_pH/) is hosted on my Shinyapp.io account, and the source codes are available on my [Github repository](https://github.com/zweinstein/my1stShinyApp).
+
+--- 
+
+## Making Potassium Phosphate Buffer
+    
+Phosphate buffer is one of the most widely used buffer systems in biological experiments. A desired $pH$ in the range of $5.8 - 8$ can be achieved by mixing potassium phosphate monobasic ($KH_2PO_4$) and dibasic ($K_2HPO_4$) salts in proper ratios. The anions of the two salts form conjugate acid and base in solution: $H_2PO_4^- \leftrightarrow H^+ + HPO_4^{2-}$. The dissociation of $H^+$ from $H_2PO_4^-$ and association of $H^+$ to $HPO_4^{2-}$ forms a chemical equilibrium to moderate changes in $H^+$ concentration. Based on Henderson-Hasselbalch equation, the $pH$ of the solution is determined by the concentrations of the conjugate acid ($H_2PO_4 ^-$) and base ($HPO_4 ^{2-}$) and the dissociation constant of the acid ( $K_a$ ):  
+    
+$$ pH = pK_a + log{\frac{HPO_4 ^{2-}}{H_2PO_4 ^-}} $$
+    
+where $pK_a$ is the negative $log$ of  $K_a$  ($-logK_a$), which is $7.2$ for $H_2PO_4^-$. This equation provides the basis for calculating the required amount of $KH_2PO_4$ and $K_2HPO_4$ salts to make a desired buffer.
+
+---
+
+## How to Use the App
+
+This App helps you conveniently determine the amount of both $KH_2PO_4$ and $K_2HPO_4$ salts, either in anhydrous form or in 1 $M$ stock solutions, required to make your buffer solution. To use the App, simply type in or select the desired volume, concentration, and $pH$ of your buffer in the *Sidebar Panel*.  
+
+The results and additional information are shown in the *Main Panel*:
+    
+**Tab 1. Introduction:** Briefly explains what the App does and gives instruction.
+
+**Tab 2. Single $pH$ Buffer:** Shows instantaneous results if the user needs to make a single $pH$ buffer.
+
+**Tab 3. A Series of $pH$ Buffers:** To make a series of buffers with different $pH$s, hit "Generate $pH$ table!" on the side panel. 
+
+---
+
+## Example Output
+
+If the user wants to use 1 $M$ stock solutions of $KH_2PO_4$ and $K_2HPO_4$ to make 1 $L$ of 0.1 $M$ buffer at $pH = 7$ (the default inputs), the App calculates the required volumes ($L$) using the following R codes:
+
+
+```r
+## User Inputs: pH, Concentration (C), and Volume (V):
+pH <- 7; C <- 0.1 ; V <- 1
+pKa <- 7.2                        # pKa of the buffer
+R = 10^(pH - pKa)                 # Calculate ratio of Base and Acid concentrations
+Ca = ( C / (R+1) )                # Calculate Acid concentration
+Cb = R * Ca                       # Calculate Base concentration
+Va = round(Ca * 1, digits = 6)    # Volume of 1 M stock Acid (KH2PO4) required
+Vb = round(Cb * 1, digits = 6)    # Volume of 1 M stock Base (K2HPO4) required
+paste(Va, "L of 1 M KH2PO4 solution and", Vb, "L of 1 M K2HPO4 solution") # Output
+```
+
+```
+## [1] "0.061314 L of 1 M KH2PO4 solution and 0.038686 L of 1 M K2HPO4 solution"
+```
+
+

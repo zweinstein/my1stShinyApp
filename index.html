@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Making a Biological Buffer with Potassium Phosphate</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Making a Biological Buffer with Potassium Phosphate">
+  <meta name="author" content="Zhen Wang">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/default.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Making a Biological Buffer with Potassium Phosphate</h1>
+    <h2>a simple and convenient Shiny App</h2>
+    <p>Zhen Wang<br/>Albert Einstein College of Medicine</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Biological reactions are sensitive to the acidity of the solution, which is measured by the negative \(log\) of hydrogen ion (\(H^+\)) concentration, \(-log[H^+]\), or simply \(pH\). In most living organisms, the \(pH\) of blood is maintained at neutral \(pH\) (e.g. \(pH = 7.4\)). In order to study biomolecules under physiological conditions, biological scientists regularly make buffer solutions at neutral \(pH\) to mimic the cellular environment. Currently, there is no open-source App available to help scientists with this daily task to prepare biological buffers. I developed a prototype Shiny App that can quickly determine the composition of a potassium phosphate buffer in the \(pH\) range of \(5.8 - 8\). In the future, this App can be calibrated by experiments to ensure accuracy and more features will be added for making different buffer systems to include a wider \(pH\) range. </p>
+
+<p>The <a href="https://zweinstein.shinyapps.io/App_Buffer_pH/">App</a> is hosted on my Shinyapp.io account, and the source codes are available on my <a href="https://github.com/zweinstein/my1stShinyApp">Github repository</a>.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Making Potassium Phosphate Buffer</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Phosphate buffer is one of the most widely used buffer systems in biological experiments. A desired \(pH\) in the range of \(5.8 - 8\) can be achieved by mixing potassium phosphate monobasic (\(KH_2PO_4\)) and dibasic (\(K_2HPO_4\)) salts in proper ratios. The anions of the two salts form conjugate acid and base in solution: \(H_2PO_4^- \leftrightarrow H^+ + HPO_4^{2-}\). The dissociation of \(H^+\) from \(H_2PO_4^-\) and association of \(H^+\) to \(HPO_4^{2-}\) forms a chemical equilibrium to moderate changes in \(H^+\) concentration. Based on Henderson-Hasselbalch equation, the \(pH\) of the solution is determined by the concentrations of the conjugate acid (\(H_2PO_4 ^-\)) and base (\(HPO_4 ^{2-}\)) and the dissociation constant of the acid ( \(K_a\) ):  </p>
+
+<p>\[ pH = pK_a + log{\frac{HPO_4 ^{2-}}{H_2PO_4 ^-}} \]</p>
+
+<p>where \(pK_a\) is the negative \(log\) of  \(K_a\)  (\(-logK_a\)), which is \(7.2\) for \(H_2PO_4^-\). This equation provides the basis for calculating the required amount of \(KH_2PO_4\) and \(K_2HPO_4\) salts to make a desired buffer.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>How to Use the App</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This App helps you conveniently determine the amount of both \(KH_2PO_4\) and \(K_2HPO_4\) salts, either in anhydrous form or in 1 \(M\) stock solutions, required to make your buffer solution. To use the App, simply type in or select the desired volume, concentration, and \(pH\) of your buffer in the <em>Sidebar Panel</em>.  </p>
+
+<p>The results and additional information are shown in the <em>Main Panel</em>:</p>
+
+<p><strong>Tab 1. Introduction:</strong> Briefly explains what the App does and gives instruction.</p>
+
+<p><strong>Tab 2. Single \(pH\) Buffer:</strong> Shows instantaneous results if the user needs to make a single \(pH\) buffer.</p>
+
+<p><strong>Tab 3. A Series of \(pH\) Buffers:</strong> To make a series of buffers with different $pH$s, hit &quot;Generate \(pH\) table!&quot; on the side panel. </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Example Output</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>If the user wants to use 1 \(M\) stock solutions of \(KH_2PO_4\) and \(K_2HPO_4\) to make 1 \(L\) of 0.1 \(M\) buffer at \(pH = 7\) (the default inputs), the App calculates the required volumes (\(L\)) using the following R codes:</p>
+
+<pre><code class="r">## User Inputs: pH, Concentration (C), and Volume (V):
+pH &lt;- 7; C &lt;- 0.1 ; V &lt;- 1
+pKa &lt;- 7.2                        # pKa of the buffer
+R = 10^(pH - pKa)                 # Calculate ratio of Base and Acid concentrations
+Ca = ( C / (R+1) )                # Calculate Acid concentration
+Cb = R * Ca                       # Calculate Base concentration
+Va = round(Ca * 1, digits = 6)    # Volume of 1 M stock Acid (KH2PO4) required
+Vb = round(Cb * 1, digits = 6)    # Volume of 1 M stock Base (K2HPO4) required
+paste(Va, &quot;L of 1 M KH2PO4 solution and&quot;, Vb, &quot;L of 1 M K2HPO4 solution&quot;) # Output
+</code></pre>
+
+<pre><code>## [1] &quot;0.061314 L of 1 M KH2PO4 solution and 0.038686 L of 1 M K2HPO4 solution&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Making Potassium Phosphate Buffer'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='How to Use the App'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Example Output'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
